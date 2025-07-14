@@ -1,0 +1,321 @@
+/*--------------------------------------------------------------
+# Font & Color Variables
+--------------------------------------------------------------*/
+:root {
+  /* Fonts */
+  --default-font: ui-sans-serif, system-ui, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  --heading-font: ui-sans-serif, system-ui, sans-serif;
+  --nav-font: ui-sans-serif, system-ui, sans-serif;
+
+  /* Colors */
+  --background-color: #262626;
+  --default-color: #a3a3a3;
+  --heading-color: #e5e5e5;
+  --accent-color: #facc15;
+  --surface-color: #2b3035;
+  --contrast-color: #181616;
+
+  /* Navigation Colors */
+  --nav-color: #a3a3a3;
+  --nav-hover-color: #facc15;
+  --nav-mobile-background-color: #262626;
+  --nav-dropdown-background-color: #ffffff;
+  --nav-dropdown-color: #000000;
+  --nav-dropdown-hover-color: #000000;
+
+  /* Additional Colors */
+  --light-background-color: #212529;
+  --light-surface-color: #3c3b3b;
+  --dark-background-color: #000000;
+  --dark-surface-color: #363636;
+  --dark-contrast-color: #e5e5e5;
+}
+
+/* Smooth scroll */
+:root {
+  scroll-behavior: smooth;
+}
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  font-family: var(--default-font);
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: color-mix(in srgb, var(--accent-color), transparent 25%);
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+}
+
+/*--------------------------------------------------------------
+# Global Header
+--------------------------------------------------------------*/
+.header {
+  --background-color: rgba(255, 255, 255, 0);
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 20px 0;
+  transition: all 0.5s;
+  z-index: 997;
+}
+
+.header .header-container {
+  background: var(--background-color);
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 5px 25px;
+}
+
+@media (min-width: 1200px) {
+  .header .header-container {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.3px);
+    -webkit-backdrop-filter: blur(5.3px);
+  }
+}
+
+.scrolled .header .header-container {
+  background: var(--background-color);
+}
+
+.header .logo {
+  line-height: 1;
+  padding-left: 5px;
+}
+
+.header .logo img {
+  max-height: 36px;
+  margin-inline-end: 8px;
+}
+
+.header .logo h1 {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 500;
+  color: var(--heading-color);
+}
+
+.header .btn-getstarted {
+  color: var(--accent-color);
+  font-size: 14px;
+  padding: 10px 13px;
+  margin: 0 0 0 30px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.header .btn-getstarted:hover,
+.header .btn-getstarted:focus:hover {
+  color: var(--contrast-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+}
+
+/*--------------------------------------------------------------
+# Navigation Menu - Desktop
+--------------------------------------------------------------*/
+@media (min-width: 1200px) {
+  .navmenu {
+    padding: 0;
+  }
+
+  .navmenu ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+
+  .navmenu li {
+    position: relative;
+  }
+
+  .navmenu a,
+  .navmenu a:focus {
+    color: var(--nav-color);
+    padding: 18px 15px;
+    font-size: 16px;
+    font-family: var(--nav-font);
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    transition: 0.3s;
+  }
+
+  .navmenu li:hover > a,
+  .navmenu .active,
+  .navmenu .active:focus {
+    color: var(--nav-hover-color);
+  }
+
+  /* Hide mobile toggle on desktop */
+  .mobile-nav-toggle {
+    display: none;
+  }
+}
+
+/*--------------------------------------------------------------
+# Navigation Menu - Mobile
+--------------------------------------------------------------*/
+@media (max-width: 1199px) {
+  .mobile-nav-toggle {
+    display: none; /* Hide menu button */
+  }
+
+  .navmenu {
+    padding: 0;
+    z-index: 9997;
+  }
+
+  .navmenu ul {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: flex !important;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 10px 0;
+    background-color: var(--background-color);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    list-style: none;
+  }
+
+  .navmenu li {
+    flex: 1;
+    text-align: center;
+  }
+
+  .navmenu a,
+  .navmenu a:focus {
+    color: var(--nav-color);
+    padding: 8px 5px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    transition: 0.3s;
+  }
+
+  /* Icons for navigation items */
+  .navmenu li:nth-child(1) a::before {
+    content: "\f015";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 18px;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .navmenu li:nth-child(2) a::before {
+    content: "\f007";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 18px;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .navmenu li:nth-child(3) a::before {
+    content: "\f005";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 18px;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .navmenu li:nth-child(4) a::before {
+    content: "\f0c8";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 18px;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .navmenu li:nth-child(5) a::before {
+    content: "\f155";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 18px;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .navmenu li:nth-child(6) a::before {
+    content: "\f0e0";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 18px;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  /* Active and hover states */
+  .navmenu a:hover,
+  .navmenu .active,
+  .navmenu .active:focus {
+    color: var(--accent-color);
+  }
+
+  /* Main content padding to prevent overlap with fixed navigation */
+  main {
+    padding-bottom: 70px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Responsive Header Adjustments
+--------------------------------------------------------------*/
+@media (max-width: 1200px) {
+  .header {
+    padding-top: 10px;
+  }
+
+  .header .header-container {
+    margin-inline: 10px;
+    padding: 10px 5px 10px 15px;
+  }
+
+  .header .logo {
+    order: 1;
+  }
+
+  .header .btn-getstarted {
+    order: 2;
+    margin: 0 10px 0 0;
+    padding: 3px 7px;
+  }
+
+  .header .navmenu {
+    order: 3;
+  }
+}
+
+@media (max-width: 767px) {
+  .scrolled .header .header-container {
+    background: color-mix(in srgb, var(--contrast-color), transparent 5%);
+  }
+}

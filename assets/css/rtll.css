@@ -1,0 +1,61 @@
+:root {
+    --default-font: "Cairo", serif;
+    --heading-font: "Cairo", serif;
+    --nav-font: "Cairo", serif;
+  }
+  
+body {
+    color: var(--default-color);
+    background-color: var(--background-color);
+    font-family: var(--default-font);
+  }
+
+.swiper-wrapper {
+    flex-direction: row-reverse;
+}
+
+
+  /* Navmenu - Mobile */
+@media (max-width: 1199px) {
+  .navmenu {
+    direction: rtl;
+  }
+}
+
+
+/*--------------------------------------------------------------
+# About Section
+--------------------------------------------------------------*/
+.about .profile .profile-name {
+  font-size: 15px;
+  margin: 0;
+}
+
+.about .image-wrapper .small-image {
+  left: unset;
+  right: -10%;
+  
+}
+
+.about .image-wrapper .experience-badge {
+  left: 5%;
+  right: unset;
+  
+}
+
+
+
+/*--------------------------------------------------------------
+# Features Section
+--------------------------------------------------------------*/
+.features .tab-pane h3:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent-color);
+  left: unset;
+  right: 0;
+  bottom: 0;
+}
