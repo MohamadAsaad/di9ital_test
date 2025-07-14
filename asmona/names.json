@@ -1,0 +1,318 @@
+{
+    "ذكر": {
+        "ديني": [
+            {
+                "name": "محمد",
+                "meaning": "المرسل",
+                "starting_letter": "م",
+                "length": 4
+            },
+            {
+                "name": "علي",
+                "meaning": "الأسد",
+                "starting_letter": "ع",
+                "length": 3
+            },
+            {
+                "name": "حسن",
+                "meaning": "الجمال",
+                "starting_letter": "ح",
+                "length": 4
+            },
+            {
+                "name": "عبد الله",
+                "meaning": "عبد الله",
+                "starting_letter": "ع",
+                "length": 9
+            },
+            {
+                "name": "إبراهيم",
+                "meaning": "أب الأباء",
+                "starting_letter": "إ",
+                "length": 7
+            },
+            {
+                "name": "يوسف",
+                "meaning": "الله يزيد",
+                "starting_letter": "ي",
+                "length": 4
+            },
+            {
+                "name": "إسماعيل",
+                "meaning": "سمع الله له",
+                "starting_letter": "إ",
+                "length": 7
+            },
+            {
+                "name": "موسى",
+                "meaning": "ماء، بحر",
+                "starting_letter": "م",
+                "length": 4
+            },
+            {
+                "name": "محمد",
+                "meaning": "المرسل",
+                "starting_letter": "م",
+                "length": 4
+            },
+            {
+                "name": "أحمد",
+                "meaning": "الجدير بالحمد",
+                "starting_letter": "أ",
+                "length": 4
+            }
+        ],
+        "تركي": [
+            {
+                "name": "يوسف",
+                "meaning": "الله يزيد",
+                "starting_letter": "ي",
+                "length": 4
+            },
+            {
+                "name": "علي",
+                "meaning": "الأسد",
+                "starting_letter": "ع",
+                "length": 3
+            },
+            {
+                "name": "مراد",
+                "meaning": "الهدف أو المبتغى",
+                "starting_letter": "م",
+                "length": 4
+            },
+            {
+                "name": "رائد",
+                "meaning": "المتقدم أو المبتكر",
+                "starting_letter": "ر",
+                "length": 4
+            },
+            {
+                "name": "مجد",
+                "meaning": "العزة والشرف",
+                "starting_letter": "م",
+                "length": 3
+            },
+            {
+                "name": "براق",
+                "meaning": "اللامع أو المتوهج",
+                "starting_letter": "ب",
+                "length": 4
+            },
+            {
+                "name": "جان",
+                "meaning": "الحياة",
+                "starting_letter": "ج",
+                "length": 3
+            },
+            {
+                "name": "أحمد",
+                "meaning": "الجدير بالحمد",
+                "starting_letter": "أ",
+                "length": 4
+            },
+            {
+                "name": "جاكوب",
+                "meaning": "الذي يطابق الله",
+                "starting_letter": "ج",
+                "length": 5
+            },
+            {
+                "name": "كريم",
+                "meaning": "السخي المعطاء",
+                "starting_letter": "ك",
+                "length": 4
+            }
+        ],
+        "حديث": [
+            {
+                "name": "ريان",
+                "meaning": "المرتوي",
+                "starting_letter": "ر",
+                "length": 4
+            },
+            {
+                "name": "جود",
+                "meaning": "الكرم والعطاء",
+                "starting_letter": "ج",
+                "length": 3
+            },
+            {
+                "name": "أمير",
+                "meaning": "الأمير أو القائد",
+                "starting_letter": "أ",
+                "length": 4
+            },
+            {
+                "name": "طلال",
+                "meaning": "الذي يتسلق الجبال",
+                "starting_letter": "ط",
+                "length": 4
+            },
+            {
+                "name": "أدهم",
+                "meaning": "الظلام",
+                "starting_letter": "أ",
+                "length": 4
+            }
+        ]
+    },
+    "أنثى": {
+        "ديني": [
+            {
+                "name": "فاطمة",
+                "meaning": "الطاهرة",
+                "starting_letter": "ف",
+                "length": 5
+            },
+            {
+                "name": "عائشة",
+                "meaning": "الحيّة",
+                "starting_letter": "ع",
+                "length": 5
+            },
+            {
+                "name": "زينب",
+                "meaning": "الزهرة الجميلة",
+                "starting_letter": "ز",
+                "length": 4
+            },
+            {
+                "name": "مريم",
+                "meaning": "السيدة العذراء",
+                "starting_letter": "م",
+                "length": 5
+            },
+            {
+                "name": "فردوس",
+                "meaning": "الجنة",
+                "starting_letter": "ف",
+                "length": 6
+            },
+            {
+                "name": "أمينة",
+                "meaning": "الأمينة الموثوقة",
+                "starting_letter": "أ",
+                "length": 5
+            },
+            {
+                "name": "سمية",
+                "meaning": "السيدة ذات المكانة العالية",
+                "starting_letter": "س",
+                "length": 5
+            },
+            {
+                "name": "حبيبة",
+                "meaning": "المحبوبة",
+                "starting_letter": "ح",
+                "length": 6
+            },
+            {
+                "name": "رقيه",
+                "meaning": "النبيلة",
+                "starting_letter": "ر",
+                "length": 4
+            },
+            {
+                "name": "أسماء",
+                "meaning": "ذات المكانة الرفيعة",
+                "starting_letter": "أ",
+                "length": 5
+            }
+        ],
+        "عربي": [
+            {
+                "name": "زهراء",
+                "meaning": "الزهرة",
+                "starting_letter": "ز",
+                "length": 5
+            },
+            {
+                "name": "عليا",
+                "meaning": "الرفيعة المقام",
+                "starting_letter": "ع",
+                "length": 4
+            },
+            {
+                "name": "أماني",
+                "meaning": "الطموحات والأمل",
+                "starting_letter": "أ",
+                "length": 5
+            },
+            {
+                "name": "سلمى",
+                "meaning": "السلامة والراحة",
+                "starting_letter": "س",
+                "length": 4
+            },
+            {
+                "name": "سارة",
+                "meaning": "الضوء الساطع",
+                "starting_letter": "س",
+                "length": 5
+            },
+            {
+                "name": "مها",
+                "meaning": "الأنثى الجميلة",
+                "starting_letter": "م",
+                "length": 3
+            },
+            {
+                "name": "سناء",
+                "meaning": "النور الساطع",
+                "starting_letter": "س",
+                "length": 4
+            },
+            {
+                "name": "ليلى",
+                "meaning": "الليل الجميل",
+                "starting_letter": "ل",
+                "length": 4
+            },
+            {
+                "name": "نورة",
+                "meaning": "الضياء والنور",
+                "starting_letter": "ن",
+                "length": 4
+            },
+            {
+                "name": "رزان",
+                "meaning": "الوقار والهدوء",
+                "starting_letter": "ر",
+                "length": 4
+            }
+        ],
+        "حديث": [
+            {
+                "name": "جنى",
+                "meaning": "الجنة",
+                "starting_letter": "ج",
+                "length": 3
+            },
+            {
+                "name": "رهف",
+                "meaning": "النعومة واللطافة",
+                "starting_letter": "ر",
+                "length": 4
+            },
+            {
+                "name": "ميار",
+                "meaning": "الهدية",
+                "starting_letter": "م",
+                "length": 4
+            },
+            {
+                "name": "هدى",
+                "meaning": "الإرشاد والهداية",
+                "starting_letter": "ه",
+                "length": 3
+            },
+            {
+                "name": "ريم",
+                "meaning": "الغزال الأبيض",
+                "starting_letter": "ر",
+                "length": 3
+            }
+        ]
+    }
+}

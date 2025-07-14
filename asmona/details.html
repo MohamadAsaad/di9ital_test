@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>تفاصيل الاسم - أسمونا</title>
+    <link rel="stylesheet" href="/asmona/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <meta name="description" content="اكتشف معنى اسم طفلك مع أسمونا - دليل الأسماء العربية والتركية والدينية والحديثة.">
+    <meta property="og:title" content="تفاصيل الاسم - أسمونا">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+</head>
+
+<body class="main-content">
+    <div class="modern-form">
+        <div class="search-header">
+            <h2 id="name-title">اسم</h2>
+            <p id="name-meaning">معناه هنا</p>
+        </div>
+
+        <div class="card-body" style="justify-content: start;">
+            <div class="name-badge" id="name-letter">?</div>
+            <div class="name-details">
+                <p><i class="fas fa-venus-mars"></i> <span id="name-gender"></span></p>
+                <p><i class="fas fa-tag"></i> <span id="name-type"></span></p>
+                <p><i class="fas fa-hashtag"></i> <span id="name-length"></span> أحرف</p>
+            </div>
+        </div>
+
+        <hr style="margin: 2rem 0;">
+
+        <div id="not-found" style="display: none; text-align: center;">
+            <p style="font-size: 1.2rem; color: #888;">الاسم غير موجود في قاعدة البيانات.</p>
+            <div style="margin-top: 1rem;">
+                <a href="index.html" class="secondary-btn"><i class="fas fa-arrow-right"></i> عودة للرئيسية</a>
+                <button class="secondary-btn" id="random-btn"><i class="fas fa-magic"></i> اسم عشوائي</button>
+            </div>
+        </div>
+
+        <div id="similar-wrapper">
+            <h3><i class="fas fa-magic"></i> أسماء مشابهة</h3>
+            <div id="similar-names" class="name-results"></div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDguR3k4zcF987QQiIr2Z3_XV8pUyGFBC0",
+            authDomain: "asmona-01.firebaseapp.com",
+            projectId: "asmona-01",
+            storageBucket: "asmona-01.firebasestorage.app",
+            messagingSenderId: "499572569571",
+            appId: "1:499572569571:web:a56419658501762272dcd6",
+            measurementId: "G-R84KPKH0ER"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const nameQuery = new URLSearchParams(window.location.search).get("name");
+
+        async function loadDetails() {
+            const querySnapshot = await getDocs(collection(db, "names"));
+            const all = [];
+
+            querySnapshot.forEach(doc => {
+                const data = doc.data();
+                all.push(data);
+            });
+
+            const found = all.find(n => n.name === nameQuery);
+
+            if (!found) {
+                document.getElementById("not-found").style.display = "block";
+                document.getElementById("similar-wrapper").style.display = "none";
+                return;
+            }
+
+            document.title = `معنى اسم ${found.name} - أسمونا`;
+            document.querySelector('meta[property="og:title"]').setAttribute('content', `معنى اسم ${found.name} - أسمونا`);
+            document.querySelector('meta[property="og:description"]').setAttribute('content', found.meaning);
+
+            document.getElementById('name-title').textContent = found.name;
+            document.getElementById('name-meaning').textContent = found.meaning;
+            document.getElementById('name-letter').textContent = found.starting_letter;
+            document.getElementById('name-gender').textContent = found.gender;
+            document.getElementById('name-type').textContent = found.type;
+            document.getElementById('name-length').textContent = found.length;
+
+            const similar = all.filter(n =>
+                n.name !== found.name &&
+                (n.starting_letter === found.starting_letter || n.type === found.type)
+            ).slice(0, 6);
+
+            document.getElementById('similar-names').innerHTML = similar.map(n => `
+                <div class="name-card">
+                    <div class="name"><a href="details.html?name=${encodeURIComponent(n.name)}">${n.name}</a></div>
+                    <div class="meaning">${n.meaning}</div>
+                </div>
+            `).join('');
+        }
+
+        loadDetails();
+
+        // اسم عشوائي
+        document.getElementById('random-btn')?.addEventListener('click', async () => {
+            const querySnapshot = await getDocs(collection(db, "names"));
+            const all = [];
+            querySnapshot.forEach(doc => all.push(doc.data()));
+
+            const random = all[Math.floor(Math.random() * all.length)];
+            window.location.href = `details.html?name=${encodeURIComponent(random.name)}`;
+        });
+    </script>
+</body>
+
+</html>

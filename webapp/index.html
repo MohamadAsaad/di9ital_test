@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- معلومات أساسية -->
+    <title>Digital Art - تصميم مواقع احترافية | تطوير ويب | تحسين SEO</title>
+    <meta name="description"
+        content="Digital Art تقدم خدمات تصميم وتطوير المواقع الإلكترونية، تحسين محركات البحث (SEO)، وحلول التجارة الإلكترونية في تركيا">
+
+    <!-- علامات Open Graph / Twitter (مهمة لمشاركة الموقع) -->
+    <meta property="og:title" content="Digital Art - تصميم وتطوير المواقع الإلكترونية">
+    <meta property="og:description" content="حلول ويب متكاملة بجودة عالية وأداء ممتاز">
+    <meta property="og:image" content="https://www.di9ital.site/assets/img/og-image.webp">
+    <meta property="og:url" content="https://digital-art.website">
+    <meta property="og:type" content="website">
+
+    <!-- Preload للموارد المهمة -->
+    <link rel="preload" href="assets/css/main.css" as="style">
+    <link rel="preload" href="assets/js/main.js" as="script">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" as="style">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="assets/img/logo.webp">
+    <link rel="apple-touch-icon" href="assets/img/logo.webp">
+
+    <!-- Structured Data (اختياري لتحسين SEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Digital Art",
+      "url": "https://digital-art.website",
+      "logo": "https://digital-art.website/assets/img/logo.webp",
+      "description": "شركة متخصصة في تصميم وتطوير المواقع الإلكترونية"
+    }
+    </script>
+</head>
+
+<body>
+    <!-- شاشة التحميل -->
+    <div id="loader" aria-hidden="true">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- الهيدر -->
+    <header id="header" class="header fixed-top">
+        <div class="container-xl">
+            <a href="/" class="logo router-link">
+                <img src="assets/img/logo.webp" width="28" height="28" alt="Digital Art Logo" loading="lazy">
+                <h1>Digital Art</h1>
+            </a>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="/" class="nav-link router-link active">الرئيسية</a></li>
+                    <li><a href="/about" class="nav-link router-link">من نحن</a></li>
+                    <li><a href="/services" class="nav-link router-link">الخدمات</a></li>
+                    <li><a href="/portfolio" class="nav-link router-link">أعمالنا</a></li>
+                    <li><a href="/pricing" class="nav-link router-link">الأسعار</a></li>
+                    <li><a href="/contact" class="nav-link router-link">تواصل معنا</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="تبديل الوضع المظلم">
+                    <i class="bi bi-moon-fill"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main id="app-content">
+        <!-- سيتم تحميل المحتوى ديناميكيًا هنا -->
+    </main>
+
+    <!-- القائمة الجوالية -->
+    <nav class="mobile-nav-bottom" aria-label="القائمة الرئيسية للجوال">
+        <a href="/" class="router-link active" aria-current="page">
+            <i class="bi bi-house-door"></i>
+            <span>الرئيسية</span>
+        </a>
+        <a href="/about" class="router-link">
+            <i class="bi bi-people"></i>
+            <span>من نحن</span>
+        </a>
+        <a href="/services" class="router-link">
+            <i class="bi bi-gear-wide-connected"></i>
+            <span>الخدمات</span>
+        </a>
+        <a href="/contact" class="router-link">
+            <i class="bi bi-envelope"></i>
+            <span>تواصل</span>
+        </a>
+    </nav>
+
+    <!-- الفوتر -->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="/" class="logo router-link">
+                        <h2>Digital Art</h2>
+                    </a>
+                    <p>نلتزم بتقديم حلول استثنائية مصممة خصيصًا لتلبية احتياجات عملائنا الفريدة</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="تويتر"><i class="bi bi-twitter"></i></a>
+                        <a href="#" aria-label="فيسبوك"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="إنستغرام"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="/" class="router-link">الرئيسية</a></li>
+                        <li><a href="/about" class="router-link">من نحن</a></li>
+                        <li><a href="/services" class="router-link">خدماتنا</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h3>اتصل بنا</h3>
+                    <address>
+                        <p>إسطنبول، تركيا</p>
+                        <p><strong>الهاتف:</strong> <span dir="ltr">+90 539 884 72 82</span></p>
+                        <p><strong>البريد الإلكتروني:</strong> info@digital-art.website</p>
+                    </address>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; <span id="current-year"></span> جميع الحقوق محفوظة لـ <strong>Digital Art</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر العودة للأعلى -->
+    <a href="#" class="scroll-top" aria-label="العودة إلى الأعلى">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
+    <script src="assets/js/main.js" defer></script>
+
+    <!-- مكتبات خارجية (يتم تحميلها بشكل غير متزامن) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    </noscript>
+</body>
+
+</html>

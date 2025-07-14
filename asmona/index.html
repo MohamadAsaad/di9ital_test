@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مولّد الأسماء الذكي - اختار اسم طفلك المميز</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#5d69be">
+
+    <link rel="stylesheet" href="/asmona/style.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+
+        // Your Firebase config
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyDguR3k4zcF987QQiIr2Z3_XV8pUyGFBC0",
+            authDomain: "asmona-01.firebaseapp.com",
+            projectId: "asmona-01",
+            storageBucket: "asmona-01.firebasestorage.app",
+            messagingSenderId: "499572569571",
+            appId: "1:499572569571:web:a56419658501762272dcd6",
+            measurementId: "G-R84KPKH0ER"
+        };
+
+        // Init
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // مثال: تحميل كل الأسماء
+        async function fetchNames() {
+            const querySnapshot = await getDocs(collection(db, "names"));
+            const names = [];
+            querySnapshot.forEach((doc) => {
+                names.push(doc.data());
+            });
+
+            console.log("📦 أسماء محملة:", names);
+            // هون ممكن تتعامل مع `names` مثل ما كنت تتعامل مع محتوى names.json
+        }
+
+        fetchNames();
+    </script>
+
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- الشريط الجانبي -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <i class="fas fa-baby-carriage logo-icon"></i>
+                <h1>مولّد الأسماء</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-section="name-generator">
+                    <i class="fas fa-search"></i> بحث الأسماء
+                </a>
+                <a href="#" class="nav-item" data-section="pregnancy-calculator">
+                    <i class="fas fa-calculator"></i> حاسبة الحمل
+                </a>
+                <a href="#" class="nav-item" data-section="saved-names">
+                    <i class="fas fa-heart"></i> المفضلة
+                </a>
+            </nav>
+            <div class="app-info">
+                <div style="margin-top: 1rem; text-align: center;">
+                    <a href="admin.html" class="secondary-btn" style="font-size: 0.9rem;">
+                        <i class="fas fa-user-shield"></i> لوحة التحكم
+                    </a>
+                </div>
+
+                <p>شارك التطبيق مع الأصدقاء</p>
+                <div class="social-share">
+                    <button class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></button>
+                    <button class="social-btn twitter"><i class="fab fa-twitter"></i></button>
+                    <button class="social-btn facebook"><i class="fab fa-facebook-f"></i></button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <!-- قسم مولد الأسماء -->
+            <section id="name-generator" class="content-section active">
+                <div class="search-header">
+                    <h2><i class="fas fa-search"></i> ابحث عن اسم مثالي</h2>
+                    <p>اختر المعايير التي تفضلها وسنساعدك في العثور على الاسم المثالي</p>
+                </div>
+
+                <form id="name-form" class="modern-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label><i class="fas fa-venus-mars"></i> الجنس</label>
+                            <div class="gender-selector">
+                                <input type="radio" name="gender" id="male" value="ذكر" checked>
+                                <label for="male" class="gender-btn male">
+                                    <i class="fas fa-mars"></i> ذكر
+                                </label>
+                                <input type="radio" name="gender" id="female" value="أنثى">
+                                <label for="female" class="gender-btn female">
+                                    <i class="fas fa-venus"></i> أنثى
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-tags"></i> نوع الاسم</label>
+                            <select id="type" class="modern-select">
+                                <option value="all">جميع الأنواع</option>
+                                <option value="ديني">ديني</option>
+                                <option value="عربي">عربي</option>
+                                <option value="حديث">حديث</option>
+                                <option value="تركي">تركي</option>
+                                <option value="نادر">نادر</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-font"></i> الحرف الأول</label>
+                            <input type="text" id="letter" maxlength="1" placeholder="أي حرف" class="modern-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-hashtag"></i> عدد الأحرف</label>
+                            <input type="number" id="length" min="2" max="10" placeholder="أي طول" class="modern-input">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="primary-btn">
+                        <i class="fas fa-search"></i> بحث متقدم
+                    </button>
+                    <button type="button" class="secondary-btn" id="random-name-btn">
+                        <i class="fas fa-magic"></i> اقترح لي اسمًا
+                    </button>
+
+                </form>
+
+                <div class="results-container">
+                    <div class="results-header">
+                        <h3><i class="fas fa-list-ul"></i> النتائج</h3>
+                        <div class="results-count">0 اسم</div>
+                    </div>
+                    <div id="name-results" class="name-results">
+                        <!-- سيتم ملؤها بالنتائج -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- قسم حاسبة الحمل -->
+            <section id="pregnancy-calculator" class="content-section">
+                <div class="calculator-container">
+                    <h2><i class="fas fa-calendar-alt"></i> حاسبة موعد الولادة</h2>
+                    <p>احسبي موعد ولادتك المتوقع وتطور الجنين خلال فترة الحمل</p>
+
+                    <div class="calculator-card">
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar-day"></i> تاريخ أول يوم من آخر دورة شهرية</label>
+                            <input type="date" id="last-period" class="modern-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-history"></i> مدة الدورة الشهرية (بالأيام)</label>
+                            <input type="number" id="cycle-length" value="28" min="21" max="45" class="modern-input">
+                        </div>
+
+                        <button id="calculate-btn" class="primary-btn">
+                            <i class="fas fa-calculator"></i> احسب الآن
+                        </button>
+
+                        <div id="pregnancy-result" class="pregnancy-result">
+                            <!-- سيتم ملؤها بالنتائج -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- قسم الأسماء المفضلة -->
+            <section id="saved-names" class="content-section">
+                <div class="saved-names-container">
+                    <h2><i class="fas fa-heart"></i> الأسماء المفضلة</h2>
+                    <p>قائمتك الخاصة بالأسماء التي أعجبتك</p>
+                    <div id="favorites-list" class="favorites-list">
+                        <div class="empty-state">
+                            <i class="fas fa-heart-broken"></i>
+                            <p>لا توجد أسماء في المفضلة بعد</p>
+                            <button class="secondary-btn" id="browse-names">
+                                <i class="fas fa-search"></i> تصفح الأسماء
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- بطاقة مشاركة الاسم -->
+    <div id="share-modal" class="modal">
+        <div class="modal-content">
+            <div id="share-card" class="share-card">
+                <div class="card-header">
+                    <h3 id="shared-name">اسم الطفل</h3>
+                    <p id="shared-meaning">معنى الاسم</p>
+                </div>
+                <div class="card-body">
+                    <div class="name-badge">
+                        <span id="shared-letter">م</span>
+                    </div>
+                    <div class="name-details">
+                        <p><i class="fas fa-venus-mars"></i> <span id="shared-gender">ذكر</span></p>
+                        <p><i class="fas fa-tag"></i> <span id="shared-type">ديني</span></p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <p>مولّد الأسماء الذكي</p>
+                    <i class="fas fa-baby-carriage"></i>
+                </div>
+            </div>
+            <div class="share-actions">
+                <button class="share-btn whatsapp" id="share-wa">
+                    <i class="fab fa-whatsapp"></i> واتساب
+                </button>
+                <button class="share-btn twitter" id="share-tw">
+                    <i class="fab fa-twitter"></i> تويتر
+                </button>
+                <button class="share-btn facebook" id="share-fb">
+                    <i class="fab fa-facebook-f"></i> فيسبوك
+                </button>
+                <button id="download-card" class="primary-btn">
+                    <i class="fas fa-download"></i> حفظ البطاقة
+                </button>
+            </div>
+            <button class="close-modal">&times;</button>
+        </div>
+    </div>
+    <script type="module" src="/asmona/script.js"></script>
+
+
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('✅ Service Worker مسجل'))
+                .catch(err => console.error('❌ فشل التسجيل', err));
+        }
+    </script>
+
+</body>
+
+</html>

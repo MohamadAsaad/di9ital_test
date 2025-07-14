@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة التحكم - أسمونا</title>
+    <link rel="stylesheet" href="/asmona/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        td[contenteditable] {
+            background-color: #fffef2;
+            cursor: text;
+        }
+
+        .actions button {
+            margin: 0 0.3rem;
+        }
+    </style>
+</head>
+
+<body class="main-content">
+    <div class="modern-form" style="max-width: 900px; margin: auto;">
+        <div class="search-header">
+            <h2><i class="fas fa-lock"></i> لوحة التحكم</h2>
+            <p>إدارة الأسماء وإضافة أو تعديل أو حذف أو استيراد أسماء من ملف Excel/CSV</p>
+        </div>
+
+        <div id="login-section">
+            <button id="login-btn" class="primary-btn"><i class="fab fa-google"></i> تسجيل الدخول عبر Google</button>
+        </div>
+
+        <div id="admin-section" style="display: none;">
+            <form id="add-name-form" class="form-grid">
+                <div class="form-group">
+                    <label>الاسم</label>
+                    <input type="text" name="name" class="modern-input" required>
+                </div>
+                <div class="form-group">
+                    <label>المعنى</label>
+                    <input type="text" name="meaning" class="modern-input" required>
+                </div>
+                <div class="form-group">
+                    <label>الجنس</label>
+                    <select name="gender" class="modern-select" required>
+                        <option value="ذكر">ذكر</option>
+                        <option value="أنثى">أنثى</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>نوع الاسم</label>
+                    <select name="type" class="modern-select" required>
+                        <option value="ديني">ديني</option>
+                        <option value="تركي">تركي</option>
+                        <option value="عربي">عربي</option>
+                        <option value="حديث">حديث</option>
+                        <option value="نادر">نادر</option>
+                    </select>
+                </div>
+                <button type="submit" class="primary-btn"><i class="fas fa-plus"></i> إضافة</button>
+            </form>
+
+            <input type="file" id="file-input" accept=".xlsx,.csv" style="display:none">
+            <button id="import-btn" class="secondary-btn" style="margin-top:1rem;"><i class="fas fa-file-import"></i>
+                استيراد من ملف</button>
+
+            <p id="message" style="margin-top: 1rem; font-weight: bold;"></p>
+
+            <table id="names-table">
+                <thead>
+                    <tr>
+                        <th>الاسم</th>
+                        <th>المعنى</th>
+                        <th>الجنس</th>
+                        <th>النوع</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        import {
+            getFirestore, collection, addDoc, onSnapshot, doc,
+            updateDoc, deleteDoc, query, where, getDocs
+        } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+        import {
+            getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDguR3k4zcF987QQiIr2Z3_XV8pUyGFBC0",
+            authDomain: "asmona-01.firebaseapp.com",
+            projectId: "asmona-01",
+            storageBucket: "asmona-01.firebasestorage.app",
+            messagingSenderId: "499572569571",
+            appId: "1:499572569571:web:a56419658501762272dcd6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth();
+        const provider = new GoogleAuthProvider();
+
+        const loginSection = document.getElementById("login-section");
+        const adminSection = document.getElementById("admin-section");
+        const form = document.getElementById("add-name-form");
+        const tableBody = document.querySelector("#names-table tbody");
+        const message = document.getElementById("message");
+        const fileInput = document.getElementById("file-input");
+        const importBtn = document.getElementById("import-btn");
+
+        document.getElementById("login-btn").addEventListener("click", async () => {
+            await signInWithPopup(auth, provider);
+        });
+
+        onAuthStateChanged(auth, (user) => {
+          if (!user) {
+            // المستخدم لم يسجل الدخول بعد
+            loginSection.style.display = "block";
+            adminSection.style.display = "none";
+          } else if (user.email === "mohamad.1987.test@gmail.com") {
+            // تسجيل دخول ناجح ومصرح
+            loginSection.style.display = "none";
+            adminSection.style.display = "block";
+          } else {
+            // تسجيل دخول لكن ببريد غير مصرح
+            alert("🚫 غير مصرح لك بالوصول إلى هذه الصفحة");
+            auth.signOut();
+          }
+        });
+
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const data = {
+                name: form.name.value.trim(),
+                meaning: form.meaning.value.trim(),
+                gender: form.gender.value,
+                type: form.type.value,
+                starting_letter: form.name.value.trim().charAt(0),
+                length: form.name.value.trim().length
+            };
+
+            try {
+                const q = query(collection(db, "names"), where("name", "==", data.name));
+                const snapshot = await getDocs(q);
+                if (!snapshot.empty) {
+                    message.textContent = "⚠️ الاسم موجود بالفعل!";
+                    message.style.color = "orange";
+                    return;
+                }
+                await addDoc(collection(db, "names"), data);
+                message.textContent = "✅ تم إضافة الاسم بنجاح!";
+                message.style.color = "green";
+                form.reset();
+            } catch (error) {
+                message.textContent = "❌ فشل في الإضافة";
+                message.style.color = "red";
+                console.error(error);
+            }
+        });
+
+        onSnapshot(collection(db, "names"), (snapshot) => {
+            tableBody.innerHTML = "";
+            snapshot.forEach(docSnap => {
+                const name = docSnap.data();
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td contenteditable="true">${name.name}</td>
+                    <td contenteditable="true">${name.meaning}</td>
+                    <td contenteditable="true">${name.gender}</td>
+                    <td contenteditable="true">${name.type}</td>
+                    <td class="actions">
+                        <button class="secondary-btn save" data-id="${docSnap.id}"><i class="fas fa-save"></i></button>
+                        <button class="secondary-btn delete" data-id="${docSnap.id}"><i class="fas fa-trash"></i></button>
+                    </td>`;
+                tableBody.appendChild(row);
+            });
+
+            document.querySelectorAll(".save").forEach(btn => {
+                btn.addEventListener("click", async () => {
+                    const id = btn.dataset.id;
+                    const row = btn.closest("tr");
+                    const updatedData = {
+                        name: row.children[0].textContent.trim(),
+                        meaning: row.children[1].textContent.trim(),
+                        gender: row.children[2].textContent.trim(),
+                        type: row.children[3].textContent.trim(),
+                        starting_letter: row.children[0].textContent.trim().charAt(0),
+                        length: row.children[0].textContent.trim().length
+                    };
+                    await updateDoc(doc(db, "names", id), updatedData);
+                    message.textContent = "✅ تم تحديث الاسم بنجاح";
+                    message.style.color = "green";
+                });
+            });
+
+            document.querySelectorAll(".delete").forEach(btn => {
+                btn.addEventListener("click", async () => {
+                    const id = btn.dataset.id;
+                    if (confirm("هل أنت متأكد من حذف الاسم؟")) {
+                        await deleteDoc(doc(db, "names", id));
+                        message.textContent = "🗑️ تم الحذف";
+                        message.style.color = "gray";
+                    }
+                });
+            });
+        });
+
+        importBtn.addEventListener("click", () => fileInput.click());
+
+        fileInput.addEventListener("change", async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: "array" });
+                const sheetName = workbook.SheetNames[0];
+                const sheet = workbook.Sheets[sheetName];
+                const names = XLSX.utils.sheet_to_json(sheet);
+
+                let added = 0, skipped = 0;
+
+                for (const entry of names) {
+                    if (!entry.name || !entry.meaning || !entry.gender || !entry.type) {
+                        skipped++;
+                        continue;
+                    }
+
+                    const nameTrimmed = entry.name.trim();
+                    const q = query(collection(db, "names"), where("name", "==", nameTrimmed));
+                    const exists = await getDocs(q);
+                    if (!exists.empty) {
+                        skipped++;
+                        continue;
+                    }
+
+                    const doc = {
+                        name: nameTrimmed,
+                        meaning: entry.meaning.trim(),
+                        gender: entry.gender.trim(),
+                        type: entry.type.trim(),
+                        starting_letter: nameTrimmed.charAt(0),
+                        length: nameTrimmed.length
+                    };
+
+                    await addDoc(collection(db, "names"), doc);
+                    added++;
+                }
+
+                alert(`✅ تم استيراد ${added} اسم.\n❌ تم تخطي ${skipped} صف غير صالح أو مكرر.`);
+                fileInput.value = "";
+            };
+            reader.readAsArrayBuffer(file);
+        });
+    </script>
+</body>
+
+</html>

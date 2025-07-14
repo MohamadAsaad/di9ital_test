@@ -1,0 +1,846 @@
+/* =============================================
+   ملف التنسيقات الرئيسي - Digital Art
+   يحتوي على جميع تنسيقات الموقع في ملف واحد
+   تم تنظيم الأقسام بشكل منطقي لسهولة الصيانة
+============================================= */
+
+/* =============================================
+   1. المتغيرات العامة والأساسيات
+============================================= */
+:root {
+    /* الألوان - الوضع الفاتح */
+    --color-light-bg: #ffffff;
+    --color-light-surface: #f8f9fa;
+    --color-light-text: #444444;
+    --color-light-heading: #222222;
+    --color-light-accent: #0d6efd;
+    --color-light-contrast: #ffffff;
+    --color-light-accent-2: #f3f3f3;
+  
+    /* الألوان - الوضع المظلم */
+    --color-dark-bg: #111827;
+    --color-dark-surface: #1f2937;
+    --color-dark-text: #a3a3a3;
+    --color-dark-heading: #e5e5e5;
+    --color-dark-accent: #facc15;
+    --color-dark-contrast: #111827;
+    --color-dark-accent-2: #374151;
+  
+    /* الألوان الحالية (تتغير مع الوضع) */
+    --c-bg: var(--color-light-bg);
+    --c-surface: var(--color-light-surface);
+    --c-text: var(--color-light-text);
+    --c-heading: var(--color-light-heading);
+    --c-accent: var(--color-light-accent);
+    --c-contrast: var(--color-light-contrast);
+    --c-accent-2: var(--color-light-accent-2);
+  
+    /* الخطوط */
+    --font-default: 'Cairo', sans-serif;
+    --font-heading: 'Cairo', sans-serif;
+  
+    /* التدرجات اللونية */
+    --gradient-text: linear-gradient(90deg, #f43f5e, #fda769, var(--color-dark-accent));
+  }
+  
+  /* الوضع المظلم */
+  .dark-mode {
+    --c-bg: var(--color-dark-bg);
+    --c-surface: var(--color-dark-surface);
+    --c-text: var(--color-dark-text);
+    --c-heading: var(--color-dark-heading);
+    --c-accent: var(--color-dark-accent);
+    --c-contrast: var(--color-dark-contrast);
+    --c-accent-2: var(--color-dark-accent-2);
+  }
+  
+  /* التنسيقات الأساسية */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: var(--font-default);
+    color: var(--c-text);
+    background-color: var(--c-bg);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    line-height: 1.6;
+    text-align: right; /* للغة العربية */
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--c-heading);
+    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  
+  a {
+    color: var(--c-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: color-mix(in srgb, var(--c-accent), #000 25%);
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* =============================================
+     2. الهيكل العام للموقع
+  ============================================= */
+  .container {
+    width: 100%;
+    padding-inline: 15px;
+    margin-inline: auto;
+  }
+  
+  @media (min-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      max-width: 720px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .container {
+      max-width: 960px;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1140px;
+    }
+  }
+  
+  .section {
+    padding: 60px 0;
+    scroll-margin-top: 70px;
+    overflow: clip;
+  }
+  
+  .section-title {
+    text-align: center;
+    padding-bottom: 60px;
+  }
+  
+  .section-title h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+  }
+  
+  .section-title h2::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: var(--c-accent);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  
+  /* =============================================
+     3. الهيدر والقائمة
+  ============================================= */
+  .header {
+    transition: all 0.3s;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 9998;
+  }
+  
+  .header .container-xl {
+    background: transparent;
+    border-radius: 50px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    padding: 5px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header.scrolled .container-xl {
+    background-color: color-mix(in srgb, var(--c-surface), transparent 10%);
+    border: 1px solid color-mix(in srgb, var(--c-text), transparent 90%);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(8px);
+  }
+  
+  .header .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header .logo h1 {
+    font-size: 24px;
+    margin: 0;
+    font-weight: 700;
+    color: var(--c-heading);
+  }
+  
+  .header .logo img {
+    max-height: 28px;
+    margin-inline-end: 8px;
+  }
+  
+  .navmenu ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navmenu a {
+    color: var(--c-text);
+    padding: 10px 15px;
+    font-weight: 500;
+    display: block;
+  }
+  
+  .navmenu a:hover,
+  .navmenu .active {
+    color: var(--c-accent);
+  }
+  
+  .dark-mode-toggle {
+    cursor: pointer;
+    color: var(--c-heading);
+    font-size: 20px;
+    margin-left: 15px;
+    transition: transform 0.3s ease;
+  }
+  
+  .dark-mode-toggle:hover {
+    transform: rotate(15deg);
+  }
+  
+  /* =============================================
+     4. القائمة الجوالية
+  ============================================= */
+  .mobile-nav-bottom {
+    display: none;
+  }
+  
+  @media (max-width: 991px) {
+    .navmenu {
+      display: none;
+    }
+  
+    .mobile-nav-bottom {
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      justify-content: space-around;
+      align-items: center;
+      margin: 0;
+      padding: 5px 0;
+      background-color: var(--c-surface);
+      border-top: 1px solid color-mix(in srgb, var(--c-text), transparent 90%);
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 9997;
+    }
+  
+    .mobile-nav-bottom a {
+      flex: 1;
+      text-align: center;
+      color: var(--c-text);
+      padding: 8px 5px;
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+  
+    .mobile-nav-bottom a.active {
+      color: var(--c-accent);
+    }
+  
+    .mobile-nav-bottom a i {
+      font-size: 20px;
+    }
+  
+    main {
+      padding-bottom: 70px;
+    }
+  }
+  
+  /* =============================================
+     5. الفوتر (تذييل الصفحة)
+  ============================================= */
+  .footer {
+    background-color: var(--c-surface);
+    color: var(--c-text);
+    padding: 40px 0;
+    font-size: 14px;
+  }
+  
+  .footer h4 {
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+  }
+  
+  .footer h4::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: var(--c-accent);
+    bottom: 0;
+    right: 0;
+  }
+  
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links ul li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer-links ul li:first-child {
+    padding-top: 0;
+  }
+  
+  .footer-links ul li i {
+    margin-left: 8px;
+    color: var(--c-accent);
+  }
+  
+  .social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--c-text), transparent 50%);
+    font-size: 16px;
+    color: var(--c-text);
+    margin-right: 10px;
+    transition: 0.3s;
+  }
+  
+  .social-links a:hover {
+    color: var(--c-accent);
+    border-color: var(--c-accent);
+  }
+  
+  .copyright {
+    text-align: center;
+    padding-top: 30px;
+    margin-top: 30px;
+    border-top: 1px solid color-mix(in srgb, var(--c-text), transparent 85%);
+  }
+  
+  /* =============================================
+     6. الأزرار والعناصر التفاعلية
+  ============================================= */
+  .btn {
+    display: inline-block;
+    padding: 10px 30px;
+    border-radius: 50px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary {
+    background-color: var(--c-accent);
+    border-color: var(--c-accent);
+    color: var(--c-contrast);
+  }
+  
+  .btn-primary:hover {
+    background-color: color-mix(in srgb, var(--c-accent), #000 15%);
+    border-color: color-mix(in srgb, var(--c-accent), #000 15%);
+    transform: translateY(-2px);
+  }
+  
+  .gradient-text {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .scroll-top {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    right: 15px;
+    bottom: 15px;
+    z-index: 996;
+    background: var(--c-accent);
+    width: 44px;
+    height: 44px;
+    border-radius: 50px;
+    transition: all 0.4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .scroll-top.active {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .scroll-top i {
+    color: var(--c-contrast);
+    font-size: 24px;
+    line-height: 0;
+  }
+  
+  @media (max-width: 991px) {
+    .scroll-top.active {
+      bottom: 80px;
+    }
+  }
+  
+  /* =============================================
+     7. شاشة التحميل
+  ============================================= */
+  #loader {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  #loader.show {
+    display: flex;
+    opacity: 1;
+  }
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--c-surface);
+    border-top-color: var(--c-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* =============================================
+     8. الصفحة الرئيسية
+  ============================================= */
+  .hero {
+    padding-top: 120px;
+  }
+  
+  .hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 1.5rem;
+  }
+  
+  .company-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: .5rem 1rem;
+    background-color: var(--c-accent-2);
+    border-radius: 50px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  
+  .company-badge i {
+    margin-left: 8px;
+  }
+  
+  .stats {
+    background-color: var(--c-surface);
+  }
+  
+  .stats-item {
+    text-align: center;
+    padding: 30px 15px;
+  }
+  
+  .stats-item span {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--c-accent);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* =============================================
+     9. قسم من نحن
+  ============================================= */
+  .about .experience-badge {
+    background-color: var(--c-accent);
+    color: var(--c-contrast);
+    padding: 1.5rem;
+    border-radius: .5rem;
+    text-align: center;
+    animation: experience-float 3s ease-in-out infinite;
+    position: absolute;
+    bottom: 20px;
+    right: -20px;
+    width: 120px;
+  }
+  
+  @keyframes experience-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  /* =============================================
+     10. قسم الخدمات
+  ============================================= */
+  .service-card {
+    display: flex;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background: var(--c-surface);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .service-card .icon {
+    flex-shrink: 0;
+    font-size: 2rem;
+    margin-left: 1rem;
+    color: var(--c-accent);
+  }
+  
+  /* =============================================
+     11. قسم الأعمال (البورتفوليو)
+  ============================================= */
+  .portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+  }
+  
+  .portfolio-info {
+    opacity: 0;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .portfolio-item:hover .portfolio-info {
+    opacity: 1;
+  }
+  
+  .portfolio-info h4 {
+    font-size: 20px;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .portfolio-info a {
+    color: var(--c-accent);
+    font-size: 24px;
+    display: inline-block;
+    margin-top: 10px;
+  }
+  
+  /* =============================================
+     12. قسم الأسعار
+  ============================================= */
+  .pricing-card {
+    background: var(--c-surface);
+    border-radius: 1rem;
+    padding: 2rem;
+    height: 100%;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+  
+  .pricing-card.popular {
+    background: var(--c-accent);
+    border-color: var(--c-accent);
+    position: relative;
+  }
+  
+  .pricing-card.popular::before {
+    content: 'الأكثر شيوعاً';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--c-bg);
+    color: var(--c-heading);
+    padding: 0.25rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  
+  .pricing-card.popular,
+  .pricing-card.popular h3,
+  .pricing-card.popular p,
+  .pricing-card.popular .price,
+  .pricing-card.popular li,
+  .pricing-card.popular h4 {
+    color: var(--c-contrast);
+  }
+  
+  .pricing-card .price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--c-accent);
+    margin: 1rem 0;
+  }
+  
+  .pricing-card .price sup {
+    font-size: 1.5rem;
+  }
+  
+  .pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+  }
+  
+  .pricing-card ul li {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .pricing-card ul li i {
+    margin-left: 0.5rem;
+    color: var(--c-accent);
+  }
+  
+  /* =============================================
+     13. قسم الأسئلة الشائعة
+  ============================================= */
+  .faq-item {
+    background-color: var(--c-surface);
+    position: relative;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .faq-item h3 {
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    padding-right: 30px;
+  }
+  
+  .faq-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: 0.3s ease-in-out;
+    overflow: hidden;
+  }
+  
+  .faq-content > div {
+    overflow: hidden;
+  }
+  
+  .faq-item.faq-active .faq-content {
+    grid-template-rows: 1fr;
+    padding-top: 10px;
+  }
+  
+  .faq-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transition: 0.3s;
+    cursor: pointer;
+    color: var(--c-accent);
+  }
+  
+  .faq-item.faq-active .faq-toggle {
+    transform: rotate(90deg);
+  }
+  
+  /* =============================================
+     14. قسم اتصل بنا
+  ============================================= */
+  .info-box {
+    background-color: var(--c-surface);
+    padding: 30px;
+    border-radius: 10px;
+    height: 100%;
+  }
+  
+  .info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+  
+  .info-item i {
+    font-size: 20px;
+    color: var(--c-accent);
+    width: 44px;
+    height: 44px;
+    background: color-mix(in srgb, var(--c-accent), transparent 90%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    flex-shrink: 0;
+    margin-left: 15px;
+  }
+  
+  .php-email-form {
+    background-color: var(--c-surface);
+    padding: 30px;
+    border-radius: 10px;
+    height: 100%;
+  }
+  
+  .php-email-form .form-control {
+    padding: 0.75rem 1rem;
+    border: 1px solid color-mix(in srgb, var(--c-text), transparent 80%);
+    background-color: var(--c-bg);
+    color: var(--c-text);
+    border-radius: 0.5rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .php-email-form .form-control:focus {
+    outline: none;
+    border-color: var(--c-accent);
+  }
+  
+  /* =============================================
+     15. صفحة 404
+  ============================================= */
+  .error-404 {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .error-404 h1 {
+    font-size: 6rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--c-accent);
+  }
+  
+  /* =============================================
+     16. تأثيرات الحركة (AOS)
+  ============================================= */
+  [data-aos] {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  
+  [data-aos="fade-up"] {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  
+  [data-aos="fade-up"].aos-animate {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  /* =============================================
+     17. التجاوب مع أحجام الشاشات
+  ============================================= */
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    
+    .section {
+      padding: 40px 0;
+    }
+    
+    .section-title {
+      padding-bottom: 40px;
+    }
+    
+    .section-title h2 {
+      font-size: 28px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+    
+    .header .logo h1 {
+      font-size: 20px;
+    }
+    
+    .header .container-xl {
+      padding: 5px 15px;
+    }
+  }
