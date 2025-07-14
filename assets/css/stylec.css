@@ -696,7 +696,7 @@ section,
     max-width: 50%;
     margin: 0 auto;
     position: relative;
-    top: 70px;
+    top: 54px;
   }
   .hero .customers-badge{
     visibility: hidden; /* إخفاء شارة العملاء على الشاشات الصغيرة */
